@@ -33,7 +33,7 @@ jml('div', [
     `]],
     ['label', [
         'URL ',
-        ['input', {type: 'url', $on: {click: post}}],
+        ['input', {type: 'url', $on: {change: post}}],
         ['div', {id: 'htmlPreview'}],
         ['textarea', {id: 'htmlText'}],
         ['textarea', {id: 'headers'}]
