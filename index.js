@@ -22,20 +22,44 @@ function post (e) {
             // sandbox: 'allow-scripts'
         }));
         $('#htmlText').value = res.html;
-        $('#headers').value = JSON.stringify(res.headers, null, 4);
+        $('#responseHeaders').value = JSON.stringify(res.headers, null, 4);
         console.log('res', res);
     });
 }
 
-jml('div', [
+jml('div', {className: 'ancestor'}, [
     ['style', [`
-        textarea { width: 400px; height: 280px; }
+        html, body, .ancestor {height: 100%; margin-top: 0px; margin-bottom: 0px;}
+        .col {
+            float: left;
+            height: calc(33% - 2px);
+            padding: 0px;
+            width: 50%;
+        }
+        textarea.col {
+            width: calc(50% - 2px);
+        }
+        #htmlPreview {
+            height: calc(33% - 2px);
+            width: 100%;
+        }
     `]],
-    ['label', [
-        'URL ',
-        ['input', {type: 'url', $on: {change: post}}],
-        ['div', {id: 'htmlPreview'}],
-        ['textarea', {id: 'htmlText'}],
-        ['textarea', {id: 'headers'}]
+    ['div', {className: 'ancestor'}, [
+
+        ['label', {className: 'col'}, [
+            ['br'],
+            'URL ',
+            ['input', {type: 'url', $on: {change: post}}]
+        ]],
+        ['textarea', {id: 'requestHeaders', placeholder: '(Request headers) (NOT YET IMPLEMENTED)', className: 'col'}],
+
+        ['textarea', {id: 'htmlText', placeholder: '(Response body)', className: 'col'}],
+        ['textarea', {id: 'responseHeaders', placeholder: '(Response headers)', className: 'col'}],
+
+        ['div', {className: 'ancestor'}, [
+            ['div', {id: 'htmlPreview', style: 'color: gray; font-size: small; display: inline-block; border-collapse: collapse; border: 1px solid gray;'}, [
+                '(Preview)'
+            ]]
+        ]]
     ]]
 ], document.body);
