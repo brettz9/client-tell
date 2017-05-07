@@ -1,37 +1,53 @@
-html, body, .ancestor {height: 100%; margin-top: 0; margin-bottom: 0;}
+html, body, .ancestor {
+    height: 100%;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+.placeholder {
+    color: gray;
+    font-size: small;
+}
+
 .col {
     float: left;
     width: calc(50% - 2px - 6px - 6px); /* 2px borders, 3px padding */
     height: calc(33% - 2px - 6px);
     padding: 3px;
 }
-.responseHeaders {
+
+div.responseHeaders {
     overflow: auto;
     padding: 2px;
     border-right: 1px solid black;
 }
-.headers {
+table.responseHeaders {
     width: 100%;
 }
-.headers, .headers tr, .headers th, .headers td {
+table.responseHeaders, table.responseHeaders tr, table.responseHeaders th, table.responseHeaders td {
     border: 1px solid black;
     border-collapse: collapse;
     border-spacing: 0;
     padding: 2px;
     margin: 0;
 }
-div.innerCol {display: inline-block; padding-right: 10px;}
-input.innerCol {width: 80%;}
-.innerCol {
+
+div.urlCol {
+    display: inline-block;
+    padding-right: 10px;
+}
+input.urlCol {
+    width: 80%;
+}
+.urlCol {
     margin-top: 10px;
     padding: 0;
 }
+
 .htmlPreview {
-    height: calc(33% - 2px - 6px - 6px); /* 2px borders, 3px padding */
+    height: calc(33% - 2px - 6px); /* 2px borders, 3px padding */
     width: 100%;
     display: inline-block;
     border-collapse: collapse;
     border: 1px solid gray;
     padding: 3px;
 }
-.placeholder {color: gray; font-size: small;}

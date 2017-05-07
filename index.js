@@ -23,7 +23,7 @@ function post (e) {
             // sandbox: 'allow-scripts'
         }));
         $('#htmlText').value = res.html;
-        replace($('#responseHeaders').firstElementChild, jml('table', {className: 'headers'}, [
+        replace($('#responseHeaders').firstElementChild, jml('table', {className: 'responseHeaders'}, [
             ['tr', [
                 ['th', ['Header name']],
                 ['th', ['Value']]
@@ -42,10 +42,12 @@ jml('div', {className: 'ancestor'}, [
     ['div', {className: 'ancestor'}, [
 
         ['label', {className: 'col'}, [
-            ['div', {className: 'innerCol'}, ['URL ']],
-            ['input', {className: 'innerCol', type: 'url', $on: {change: post}}]
+            ['div', {className: 'urlCol'}, ['URL ']],
+            ['input', {className: 'urlCol', type: 'url', $on: {change: post}}]
         ]],
-        ['textarea', {id: 'requestHeaders', placeholder: '(Request headers) (NOT YET IMPLEMENTED)', className: 'col requestHeaders'}],
+        ['div', {id: 'requestHeaders', className: 'col requestHeaders'}, [
+            ['span', {className: 'placeholder'}, ['(Request headers) (NOT YET IMPLEMENTED)']]
+        ]],
 
         ['textarea', {id: 'htmlText', placeholder: '(Response body)', className: 'col'}],
         ['div', {id: 'responseHeaders', className: 'col responseHeaders'}, [
