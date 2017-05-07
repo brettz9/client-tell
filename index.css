@@ -21,10 +21,10 @@ html, body, .ancestor {height: 100%; margin-top: 0; margin-bottom: 0;}
 textarea.col {
     width: calc(50% - 2px);
 }
-div.innerCol {display: inline-block; padding-right: 10;}
+div.innerCol {display: inline-block; padding-right: 10px;}
 input.innerCol {width: 80%;}
 .innerCol {
-    margin-top: 10;
+    margin-top: 10px;
     padding: 0;
 }
 #htmlPreview {
