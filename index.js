@@ -32,12 +32,17 @@ jml('div', {className: 'ancestor'}, [
         html, body, .ancestor {height: 100%; margin-top: 0px; margin-bottom: 0px;}
         .col {
             float: left;
+            width: 50%;
             height: calc(33% - 2px);
             padding: 0px;
-            width: 50%;
         }
         textarea.col {
             width: calc(50% - 2px);
+        }
+        div.innerCol {display: inline-block; padding-right: 10px;}
+        .innerCol {
+            margin-top: 10px;
+            padding: 0px;
         }
         #htmlPreview {
             height: calc(33% - 2px);
@@ -47,9 +52,8 @@ jml('div', {className: 'ancestor'}, [
     ['div', {className: 'ancestor'}, [
 
         ['label', {className: 'col'}, [
-            ['br'],
-            'URL ',
-            ['input', {type: 'url', $on: {change: post}}]
+            ['div', {className: 'innerCol'}, ['URL ']],
+            ['input', {className: 'innerCol', type: 'url', $on: {change: post}}]
         ]],
         ['textarea', {id: 'requestHeaders', placeholder: '(Request headers) (NOT YET IMPLEMENTED)', className: 'col'}],
 
