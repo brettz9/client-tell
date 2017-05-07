@@ -28,12 +28,12 @@ function post (e) {
                 ['th', ['Header name']],
                 ['th', ['Value']]
             ]],
-            {'#': Object.entries(res.headers).map(([name, val]) =>
+            ...Object.entries(res.headers).map(([name, val]) =>
                 ['tr', [
                     ['td', [name]],
                     ['td', [val]]
                 ]]
-            )}
+            )
         ]));
     });
 }
