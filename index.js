@@ -22,7 +22,18 @@ function post (e) {
             // sandbox: 'allow-scripts'
         }));
         $('#htmlText').value = res.html;
-        $('#responseHeaders').value = JSON.stringify(res.headers, null, 4);
+        replace($('#responseHeaders').firstElementChild, jml('table', {className: 'headers'}, [
+            ['tr', [
+                ['th', ['Header name']],
+                ['th', ['Value']]
+            ]],
+            {'#': Object.entries(res.headers).map(([name, val]) =>
+                ['tr', [
+                    ['td', [name]],
+                    ['td', [val]]
+                ]]
+            )}
+        ]));
         console.log('res', res);
     });
 }
@@ -36,10 +47,24 @@ jml('div', {className: 'ancestor'}, [
             height: calc(33% - 2px);
             padding: 0px;
         }
+        #responseHeaders {
+            overflow: auto;
+        }
+        .headers {
+            width: 100%;
+        }
+        .headers, .headers tr, .headers th, .headers td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            border-spacing: 0px;
+            padding: 2px;
+            margin: 0px;
+        }
         textarea.col {
             width: calc(50% - 2px);
         }
         div.innerCol {display: inline-block; padding-right: 10px;}
+        input.innerCol {width: 80%;}
         .innerCol {
             margin-top: 10px;
             padding: 0px;
@@ -48,6 +73,7 @@ jml('div', {className: 'ancestor'}, [
             height: calc(33% - 2px);
             width: 100%;
         }
+        .placeholder {color: gray; font-size: small;}
     `]],
     ['div', {className: 'ancestor'}, [
 
@@ -58,10 +84,12 @@ jml('div', {className: 'ancestor'}, [
         ['textarea', {id: 'requestHeaders', placeholder: '(Request headers) (NOT YET IMPLEMENTED)', className: 'col'}],
 
         ['textarea', {id: 'htmlText', placeholder: '(Response body)', className: 'col'}],
-        ['textarea', {id: 'responseHeaders', placeholder: '(Response headers)', className: 'col'}],
+        ['div', {id: 'responseHeaders', className: 'col'}, [
+            ['span', {className: 'placeholder'}, ['(Response headers)']]
+        ]],
 
         ['div', {className: 'ancestor'}, [
-            ['div', {id: 'htmlPreview', style: 'color: gray; font-size: small; display: inline-block; border-collapse: collapse; border: 1px solid gray;'}, [
+            ['div', {id: 'htmlPreview', className: 'placeholder', style: 'display: inline-block; border-collapse: collapse; border: 1px solid gray;'}, [
                 '(Preview)'
             ]]
         ]]
