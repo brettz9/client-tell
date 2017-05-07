@@ -1,16 +1,33 @@
 /* eslint-env browser */
 /* globals postJSON, jml */
+const standardHeaders = ['Accept', 'Accept-Charset', 'Accept-Encoding', 'Accept-Language', 'Accept-Datetime', 'Authorization', 'Cache-Control', 'Connection', 'Connection: Upgrade', 'Permanent', 'Cookie', 'Content-Length', 'Content-MD5', 'Content-Type', 'Date', 'Expect', 'Forwarded', 'From', 'Host', 'If-Match', 'If-Modified-Since', 'If-None-Match', 'If-Range', 'If-Unmodified-Since', 'Max-Forwards', 'Origin', 'Pragma', 'Proxy-Authorization', 'Range', 'Referer', 'TE', 'User-Agent', 'Upgrade', 'Via', 'Warning'];
+const nonstandardHeaders = ['X-Requested-With', 'DNT', 'X-Forwarded-For', 'X-Forwarded-Host', 'X-Forwarded-Proto', 'Front-End-Https', 'X-Http-Method-Override', 'X-ATT-DeviceId', 'X-Wap-Profile', 'Proxy-Connection', 'X-UIDH', 'X-Csrf-Token', 'X-Request-ID', 'X-Correlation-ID'];
+
 function $ (sel) {
     return document.querySelector(sel);
 }
 function replace (oldNode, newNode) {
     return oldNode.parentNode.replaceChild(newNode, oldNode);
 }
+function remove (node) {
+    return node.parentNode.removeChild(node);
+}
 function post (e) {
     const url = e.target.value;
     postJSON({
         url: 'retrieve.js',
-        body: {url}
+        body: {
+            url,
+            headers: Array.from($('table.requestHeaders').rows).slice(1).reduce((h, row) => {
+                const cells = row.cells;
+                const headerName = cells[1].querySelector('input').value;
+                if (!headerName.trim()) {
+                    return h;
+                }
+                h[headerName] = cells[2].querySelector('input').value;
+                return h;
+            }, {})
+        }
     }).then(function (res) {
         const doc = new DOMParser().parseFromString(res.html, 'text/html');
         if (!Array.from(doc.querySelectorAll('base')).some((base) => !!base.href)) {
@@ -38,6 +55,29 @@ function post (e) {
     });
 }
 
+function createRequestHeaderRow () {
+    return ['tr', [
+        ['td', [
+            ['button', {$on: {click: () => {
+                $('table.requestHeaders').appendChild(
+                    jml(...createRequestHeaderRow())
+                );
+            }}}, ['+']],
+            ['button', {$on: {click: (e) => {
+                if ($('table.requestHeaders').rows.length > 2) {
+                    remove(e.target.parentNode.parentNode);
+                }
+            }}}, ['-']]
+        ]],
+        ['td', [
+            ['input', {list: 'datalist'}]
+        ]],
+        ['td', [
+            ['input']
+        ]]
+    ]];
+}
+
 jml('div', {className: 'ancestor'}, [
     ['div', {className: 'ancestor'}, [
 
@@ -46,7 +86,21 @@ jml('div', {className: 'ancestor'}, [
             ['input', {className: 'urlCol', type: 'url', $on: {change: post}}]
         ]],
         ['div', {id: 'requestHeaders', className: 'col requestHeaders'}, [
-            ['span', {className: 'placeholder'}, ['(Request headers) (NOT YET IMPLEMENTED)']]
+            ['datalist', {id: 'datalist'}, standardHeaders.concat(nonstandardHeaders).map(
+                (header) => ['option', [header]]
+            )],
+            ['table', {className: 'requestHeaders'}, [
+                ['tr', [
+                    ['th'],
+                    ['th', [
+                        'Request header'
+                    ]],
+                    ['th', [
+                        'Value'
+                    ]]
+                ]],
+                createRequestHeaderRow()
+            ]]
         ]],
 
         ['textarea', {id: 'htmlText', placeholder: '(Response body)', className: 'col'}],

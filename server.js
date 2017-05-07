@@ -37,7 +37,20 @@ function getContentTypeForFileByExtension (file) {
 
 function retrieveURLAndHeaders (req, res) {
     return stringifyStream(req).then((requestedInfo) => {
-        requestedInfo = JSON.parse(requestedInfo);
+        try {
+            requestedInfo = JSON.parse(requestedInfo);
+        } catch (err) {
+            console.log('JSON parsing error: ', err);
+            return;
+        }
+        if (!requestedInfo.url.trim()) {
+            return;
+        }
+        Object.keys(requestedInfo.headers).some((headerName) => {
+            if (!headerName.trim()) { // Empty headers give error
+                delete requestedInfo.headers[headerName];
+            }
+        });
         const urlObj = url.parse(requestedInfo.url);
 
         const opts = {
@@ -47,8 +60,8 @@ function retrieveURLAndHeaders (req, res) {
             // timeout:
             port: urlObj.port,
             path: urlObj.path,
-            method: 'GET'
-            // headers: {}
+            method: 'GET',
+            headers: requestedInfo.headers
         };
         const protocol = urlObj.protocol === 'https:' ? https : http;
         const req = protocol.get(opts, (resp) => {

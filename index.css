@@ -11,8 +11,37 @@ html, body, .ancestor {
 .col {
     float: left;
     width: calc(50% - 2px - 6px - 6px); /* 2px borders, 3px padding */
-    height: calc(33% - 2px - 6px);
+    height: calc(33% - 2px - 6px - 11px);
     padding: 3px;
+}
+
+div.urlCol {
+    display: inline-block;
+    padding-right: 10px;
+}
+input.urlCol {
+    width: 80%;
+}
+.urlCol {
+    margin-top: 10px;
+    padding: 0;
+}
+
+div.requestHeaders {
+    width: calc(50% - 2px - 6px);
+    margin-top: 5px;
+    margin-bottom: 20px;
+    overflow: auto;
+}
+table.requestHeaders, table.requestHeaders td:nth-child(3) input {
+    width: 100%;
+}
+table.requestHeaders td:nth-child(3) {
+    width: 80%;
+}
+
+table.requestHeaders td:nth-child(1) {
+    white-space: nowrap; /* Allow buttons side-by-side */
 }
 
 div.responseHeaders {
@@ -29,18 +58,6 @@ table.responseHeaders, table.responseHeaders tr, table.responseHeaders th, table
     border-spacing: 0;
     padding: 2px;
     margin: 0;
-}
-
-div.urlCol {
-    display: inline-block;
-    padding-right: 10px;
-}
-input.urlCol {
-    width: 80%;
-}
-.urlCol {
-    margin-top: 10px;
-    padding: 0;
 }
 
 .htmlPreview {
