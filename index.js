@@ -18,6 +18,7 @@ function post (e) {
         }
         replace($('#htmlPreview'), jml('iframe', {
             id: 'htmlPreview',
+            className: 'htmlPreview',
             srcdoc: doc.documentElement.outerHTML
             // sandbox: 'allow-scripts'
         }));
@@ -45,15 +46,15 @@ jml('div', {className: 'ancestor'}, [
             ['div', {className: 'innerCol'}, ['URL ']],
             ['input', {className: 'innerCol', type: 'url', $on: {change: post}}]
         ]],
-        ['textarea', {id: 'requestHeaders', placeholder: '(Request headers) (NOT YET IMPLEMENTED)', className: 'col'}],
+        ['textarea', {id: 'requestHeaders', placeholder: '(Request headers) (NOT YET IMPLEMENTED)', className: 'col requestHeaders'}],
 
         ['textarea', {id: 'htmlText', placeholder: '(Response body)', className: 'col'}],
-        ['div', {id: 'responseHeaders', className: 'col'}, [
+        ['div', {id: 'responseHeaders', className: 'col responseHeaders'}, [
             ['span', {className: 'placeholder'}, ['(Response headers)']]
         ]],
 
         ['div', {className: 'ancestor'}, [
-            ['div', {id: 'htmlPreview', className: 'placeholder', style: 'display: inline-block; border-collapse: collapse; border: 1px solid gray;'}, [
+            ['div', {id: 'htmlPreview', className: 'placeholder htmlPreview'}, [
                 '(Preview)'
             ]]
         ]]
