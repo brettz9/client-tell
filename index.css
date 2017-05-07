@@ -1,0 +1,34 @@
+html, body, .ancestor {height: 100%; margin-top: 0; margin-bottom: 0;}
+.col {
+    float: left;
+    width: 50%;
+    height: calc(33% - 2px);
+    padding: 0;
+}
+#responseHeaders {
+    overflow: auto;
+}
+.headers {
+    width: 100%;
+}
+.headers, .headers tr, .headers th, .headers td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    border-spacing: 0;
+    padding: 2px;
+    margin: 0;
+}
+textarea.col {
+    width: calc(50% - 2px);
+}
+div.innerCol {display: inline-block; padding-right: 10;}
+input.innerCol {width: 80%;}
+.innerCol {
+    margin-top: 10;
+    padding: 0;
+}
+#htmlPreview {
+    height: calc(33% - 2px);
+    width: 100%;
+}
+.placeholder {color: gray; font-size: small;}

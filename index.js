@@ -39,42 +39,6 @@ function post (e) {
 }
 
 jml('div', {className: 'ancestor'}, [
-    ['style', [`
-        html, body, .ancestor {height: 100%; margin-top: 0px; margin-bottom: 0px;}
-        .col {
-            float: left;
-            width: 50%;
-            height: calc(33% - 2px);
-            padding: 0px;
-        }
-        #responseHeaders {
-            overflow: auto;
-        }
-        .headers {
-            width: 100%;
-        }
-        .headers, .headers tr, .headers th, .headers td {
-            border: 1px solid black;
-            border-collapse: collapse;
-            border-spacing: 0px;
-            padding: 2px;
-            margin: 0px;
-        }
-        textarea.col {
-            width: calc(50% - 2px);
-        }
-        div.innerCol {display: inline-block; padding-right: 10px;}
-        input.innerCol {width: 80%;}
-        .innerCol {
-            margin-top: 10px;
-            padding: 0px;
-        }
-        #htmlPreview {
-            height: calc(33% - 2px);
-            width: 100%;
-        }
-        .placeholder {color: gray; font-size: small;}
-    `]],
     ['div', {className: 'ancestor'}, [
 
         ['label', {className: 'col'}, [
