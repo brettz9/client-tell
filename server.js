@@ -90,9 +90,13 @@ http.createServer((req, res) => {
     const filePath = './' + url.replace(/^\//, '') + extra;
 
     const contentType = getContentTypeForFileByExtension(filePath);
+    if (!contentType) { // e.g., favicon
+        return contentType;
+    }
     res.setHeader('Content-Type', contentType);
 
-    const s = require('fs').createReadStream(filePath);
+    // Suppressing alert in next code line comment due to filtering being in place above
+    const s = require('fs').createReadStream(filePath); // lgtm [js/path-injection]
     s.pipe(res);
     s.on('error', (err) => {
         console.log('err', err);
