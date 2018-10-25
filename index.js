@@ -30,6 +30,7 @@ async function post (e) {
         url: 'retrieve.js',
         body: {
             url,
+            method: $('#method').value,
             headers: [...$('table.requestHeaders').rows].slice(1).reduce((h, row) => {
                 const cells = row.cells;
                 const headerName = cells[1].querySelector('input').value;
@@ -94,7 +95,23 @@ jml('div', {className: 'ancestor'}, [
 
         ['label', {className: 'col'}, [
             ['div', {className: 'urlCol'}, ['URL ']],
-            ['input', {className: 'urlCol', type: 'url', $on: {change: post}}]
+            ['input', {className: 'urlCol', type: 'url', $on: {change: post}}],
+            ['div', [
+                ['label', [
+                    'HTTP Method: ',
+                    ['select', {id: 'method'}, [
+                        ['option', ['GET']],
+                        ['option', ['HEAD']],
+                        ['option', ['POST']],
+                        ['option', ['PUT']],
+                        ['option', ['DELETE']],
+                        ['option', ['CONNECT']],
+                        ['option', ['OPTIONS']],
+                        ['option', ['TRACE']],
+                        ['option', ['PATCH']]
+                    ]]
+                ]]
+            ]]
         ]],
         ['div', {id: 'requestHeaders', className: 'col requestHeaders'}, [
             ['datalist', {id: 'datalist'}, standardHeaders.concat(nonstandardHeaders).map(

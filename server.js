@@ -52,6 +52,7 @@ function retrieveURLAndHeaders (req, res) {
             }
         });
         const urlObj = url.parse(requestedInfo.url);
+        const {method} = requestedInfo;
 
         const opts = {
             hostname: urlObj.hostname,
@@ -60,7 +61,7 @@ function retrieveURLAndHeaders (req, res) {
             // timeout:
             port: urlObj.port,
             path: urlObj.path,
-            method: 'GET',
+            method, // Defaults to GET
             headers: requestedInfo.headers
         };
         const protocol = urlObj.protocol === 'https:' ? https : http;
