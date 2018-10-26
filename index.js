@@ -1,7 +1,6 @@
 /* eslint-env browser */
-
 import postJSON from './node_modules/simple-post-json/dist/index-es.js';
-import {jml} from './node_modules/jamilih/dist/jml-es.js';
+import {jml, $, body} from './node_modules/jamilih/dist/jml-es.js';
 
 const standardHeaders = [
     'Accept', 'Accept-Charset', 'Accept-Encoding', 'Accept-Language',
@@ -19,10 +18,6 @@ const nonstandardHeaders = [
     'X-ATT-DeviceId', 'X-Wap-Profile', 'Proxy-Connection', 'X-UIDH',
     'X-Csrf-Token', 'X-Request-ID', 'X-Correlation-ID'
 ];
-
-function $ (sel) {
-    return document.querySelector(sel);
-}
 
 async function post (e) {
     const url = e.target.value;
@@ -142,4 +137,4 @@ jml('div', {className: 'ancestor'}, [
             ]]
         ]]
     ]]
-], document.body);
+], body);
