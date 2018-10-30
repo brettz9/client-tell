@@ -2,7 +2,7 @@ const port = 8085;
 
 const http = require('http');
 const https = require('https');
-const url = require('url');
+const {URL} = require('url');
 
 function stringifyStream (stream) {
     return new Promise((resolve, reject) => {
@@ -51,7 +51,7 @@ function retrieveURLAndHeaders (req, res) {
                 delete requestedInfo.headers[headerName];
             }
         });
-        const urlObj = url.parse(requestedInfo.url);
+        const urlObj = new URL(requestedInfo.url);
         const {method} = requestedInfo;
 
         const opts = {

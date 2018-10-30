@@ -1,6 +1,7 @@
 # ?
 
 - Refactoring: Make use of more Jamilih properties
+- Linting (ESLint): Avoid pseudo-deprecated `url.parse`
 
 # 0.0.2
 
