@@ -1,6 +1,6 @@
 {
   "name": "client-tell",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "HTTP client app in HTML/Node",
   "main": "index.js",
   "scripts": {

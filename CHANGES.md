@@ -1,3 +1,8 @@
+# 0.0.4
+
+- Security fix: Avoid security vulnerability by updating to latest
+    lodash (and other) versions
+
 # 0.0.3
 
 - Fix (regression): Allow logging to show up again
