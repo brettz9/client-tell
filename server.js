@@ -60,7 +60,7 @@ function retrieveURLAndHeaders (req, res) {
             // agent:
             // timeout:
             port: urlObj.port,
-            path: urlObj.path,
+            path: urlObj.pathname + urlObj.search,
             method, // Defaults to GET
             headers: requestedInfo.headers
         };

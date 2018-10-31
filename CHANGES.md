@@ -1,5 +1,6 @@
-# ?
+# 0.0.3
 
+- Fix (regression): Allow logging to show up again
 - Refactoring: Make use of more Jamilih properties
 - Linting (ESLint): Avoid pseudo-deprecated `url.parse`
 - npm: Update Jamilih and devDeps
