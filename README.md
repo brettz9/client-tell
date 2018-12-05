@@ -20,3 +20,6 @@ Simple HTTP client app in HTML/Node
     1.  Might leverage
         [Link-Template](https://tools.ietf.org/html/draft-nottingham-link-template-01)
         to provide simple forms
+1. Allow for prepopulating based on reading in file format via webappfind
+    (and add this repo to
+    [webappfind-demos-samples](https://github.com/brettz9/webappfind-demos-samples))
