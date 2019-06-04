@@ -1,26 +1,35 @@
 {
   "name": "client-tell",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "HTTP client app in HTML/Node",
   "main": "index.js",
   "scripts": {
     "eslint": "eslint .",
-    "start": "opn http://localhost:8085/ && node server",
+    "start": "open-cli http://localhost:8085/ && node server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "jamilih": "^0.43.0",
+    "core-js-bundle": "^3.1.3",
+    "jamilih": "^0.45.0",
     "simple-post-json": "^0.3.1"
   },
   "devDependencies": {
-    "eslint": "5.8.0",
-    "eslint-config-standard": "12.0.0",
-    "eslint-plugin-compat": "2.6.2",
-    "eslint-plugin-import": "2.14.0",
-    "eslint-plugin-node": "8.0.0",
-    "eslint-plugin-promise": "4.0.1",
-    "eslint-plugin-standard": "4.0.0",
-    "opn-cli": "^3.1.0"
+    "@mysticatea/eslint-plugin": "^10.0.3",
+    "eslint": "^5.16.0",
+    "eslint-config-ash-nazg": "^6.1.1",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-plugin-compat": "^3.1.1",
+    "eslint-plugin-eslint-comments": "^3.1.1",
+    "eslint-plugin-import": "^2.17.3",
+    "eslint-plugin-jsdoc": "^7.2.3",
+    "eslint-plugin-markdown": "^1.0.0",
+    "eslint-plugin-no-use-extend-native": "^0.4.0",
+    "eslint-plugin-node": "^9.1.0",
+    "eslint-plugin-promise": "^4.1.1",
+    "eslint-plugin-standard": "^4.0.0",
+    "eslint-plugin-unicorn": "^9.0.0",
+    "open-cli": "^5.0.0",
+    "typescript": "^3.5.1"
   },
   "repository": {
     "type": "git",
@@ -37,7 +46,7 @@
     "url": "https://github.com/brettz9/client-tell/issues"
   },
   "engines": {
-    "node": ">=7.7.4"
+    "node": ">=10.0.0"
   },
   "homepage": "https://github.com/brettz9/client-tell#readme"
 }

@@ -19,6 +19,11 @@ const nonstandardHeaders = [
     'X-Csrf-Token', 'X-Request-ID', 'X-Correlation-ID'
 ];
 
+/**
+ *
+ * @param {Event} e
+ * @returns {Promise<void>}
+ */
 async function post (e) {
     const url = e.target.value;
     const res = await postJSON({
@@ -27,7 +32,7 @@ async function post (e) {
             url,
             method: $('#method').value,
             headers: [...$('table.requestHeaders').rows].slice(1).reduce((h, row) => {
-                const cells = row.cells;
+                const {cells} = row;
                 const headerName = cells[1].querySelector('input').value;
                 if (!headerName.trim()) {
                     return h;
@@ -38,8 +43,8 @@ async function post (e) {
         }
     });
     const doc = new DOMParser().parseFromString(res.html, 'text/html');
-    if (!Array.from(doc.querySelectorAll('base')).some((base) => !!base.href)) {
-        doc.head.appendChild(jml('base', {href: url}));
+    if (![...doc.querySelectorAll('base')].some((base) => Boolean(base.href))) {
+        doc.head.append(jml('base', {href: url}));
     }
     $('#htmlPreview').replaceWith(jml('iframe', {
         id: 'htmlPreview',
@@ -48,29 +53,35 @@ async function post (e) {
         // sandbox: 'allow-scripts'
     }));
     $('#htmlText').value = res.html;
-    $('#responseHeaders').firstElementChild.replaceWith(jml('table', {className: 'responseHeaders'}, [
-        ['tr', [
-            ['th', ['Header name']],
-            ['th', ['Value']]
-        ]],
-        ...Object.entries(res.headers).map(([name, val]) =>
+    $('#responseHeaders').firstElementChild.replaceWith(jml(
+        'table', {className: 'responseHeaders'}, [
             ['tr', [
-                ['td', [name]],
-                ['td', [val]]
-            ]]
-        )
-    ]));
+                ['th', ['Header name']],
+                ['th', ['Value']]
+            ]],
+            ...Object.entries(res.headers).map(([name, val]) => [
+                'tr', [
+                    ['td', [name]],
+                    ['td', [val]]
+                ]
+            ])
+        ]
+    ));
 }
 
+/**
+ *
+ * @returns {JamilihArray}
+ */
 function createRequestHeaderRow () {
     return ['tr', [
         ['td', [
-            ['button', {$on: {click: () => {
-                $('table.requestHeaders').appendChild(
+            ['button', {$on: {click () {
+                $('table.requestHeaders').append(
                     jml(...createRequestHeaderRow())
                 );
             }}}, ['+']],
-            ['button', {$on: {click: (e) => {
+            ['button', {$on: {click (e) {
                 if ($('table.requestHeaders').rows.length > 2) {
                     e.target.parentNode.parentNode.remove();
                 }
