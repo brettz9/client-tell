@@ -1,5 +1,9 @@
 # CHANGES for client-tell
 
+## 0.0.6
+
+- npm: Update `simple-post-json`
+
 ## 0.0.5
 
 - Breaking change: Require Node 10
