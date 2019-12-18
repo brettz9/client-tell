@@ -28,3 +28,4 @@ Simple HTTP client app in HTML/Node
 1. Allow for prepopulating based on reading in file format via webappfind
     (and add this repo to
     [webappfind-demos-samples](https://github.com/brettz9/webappfind-demos-samples))
+1. Add Cypress tests for UI and server
