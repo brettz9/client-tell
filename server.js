@@ -33,6 +33,7 @@ function stringifyStream (stream) {
  */
 function getContentTypeForFileByExtension (file) {
     let contentType;
+    // eslint-disable-next-line prefer-named-capture-group
     switch (file.match(/(\.[^.]*)?$/u)[0]) {
     default:
         throw new TypeError('Unknown content type for file ' + file);
