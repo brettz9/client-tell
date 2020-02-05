@@ -1,5 +1,9 @@
 # CHANGES for client-tell
 
+## 0.2.0
+
+- npm: Update deps. (jamilih, simple-post-json, core-js-bundle) and devDeps.
+
 ## 0.1.0
 
 - Linting (ESLint): Lint any future Markdown and HTML JS; lint per update
