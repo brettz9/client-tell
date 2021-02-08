@@ -1,5 +1,11 @@
 # CHANGES for client-tell
 
+## ?
+
+- Linting (ESLint): As per latest ash-nazg
+- npm: Update deps. and devDeps.
+- pnpm: Add lock file
+
 ## 0.2.0
 
 - npm: Update deps. (jamilih, simple-post-json, core-js-bundle) and devDeps.
