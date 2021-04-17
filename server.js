@@ -49,7 +49,7 @@ const getContentTypeForFileByExtension = function (file) {
     contentType = 'text/javascript';
     break;
   default:
-    throw new TypeError(`Unknown content type ${contentType} for file ${file}`);
+    throw new TypeError(`Unknown content type for file ${file}`);
   }
   return contentType;
 };

@@ -3,6 +3,7 @@
 ## ?
 
 - Linting (ESLint): As per latest ash-nazg
+- Lining (LGTM): Remove useless insertion
 - npm: Update deps. and devDeps.
 - pnpm: Add lock file
 
