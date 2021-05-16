@@ -87,7 +87,6 @@ const retrieveURLAndHeaders = async function (req, res) {
     port: urlObj.port,
     path: urlObj.pathname + urlObj.search,
     method, // Defaults to GET
-    // eslint-disable-next-line unicorn/consistent-destructuring -- Problems?
     headers: requestedInfo.headers
   };
   const protocol = urlObj.protocol === 'https:' ? https : http;

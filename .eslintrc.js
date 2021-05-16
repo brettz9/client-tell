@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = {
-  extends: 'ash-nazg/sauron-node',
+  extends: 'ash-nazg/sauron-node-overrides',
   settings: {
     polyfills: [
       'Array.from',

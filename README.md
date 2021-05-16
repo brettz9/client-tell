@@ -2,6 +2,10 @@
 
 Simple HTTP client app in HTML/Node
 
+## Screenshots
+
+![Main page](./screenshots/main.png)
+
 # Installation
 
 `npm i`
