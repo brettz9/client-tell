@@ -1,10 +1,19 @@
 # CHANGES for client-tell
 
-## ?
+## 0.3.0
+
+### User-impacting
+
+- Breaking change: Remove `core-js-bundle`
+- Docs: Add badges
+- Docs: Add screenshot
+- npm: Update Jamilih dep.
+
+### Dev-impacting
 
 - Linting (ESLint): As per latest ash-nazg
 - Lining (LGTM): Remove useless insertion
-- npm: Update deps. and devDeps.
+- npm: Add lint and open scripts
 - pnpm: Add lock file
 
 ## 0.2.0
