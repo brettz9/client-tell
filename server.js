@@ -77,7 +77,7 @@ const retrieveURLAndHeaders = async function (req, res) {
     }
   });
   const urlObj = new URL(requestedInfo.url);
-  const {method} = requestedInfo;
+  const {method, postData} = requestedInfo;
 
   const opts = {
     hostname: urlObj.hostname,
@@ -90,7 +90,7 @@ const retrieveURLAndHeaders = async function (req, res) {
     headers: requestedInfo.headers
   };
   const protocol = urlObj.protocol === 'https:' ? https : http;
-  const rq = protocol.get(opts, async (resp) => {
+  const rq = protocol.request(opts, async (resp) => {
     console.log(`STATUS: ${res.statusCode}`);
     console.log(`HEADERS: ${JSON.stringify(res.headers)}`);
 
@@ -103,6 +103,10 @@ const retrieveURLAndHeaders = async function (req, res) {
   rq.on('error', (e) => {
     console.error(`problem with request: ${e.message}`);
   });
+  if (postData) {
+    rq.write(postData);
+  }
+  rq.end();
 };
 
 http.createServer((req, res) => {

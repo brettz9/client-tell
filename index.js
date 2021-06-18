@@ -29,6 +29,7 @@ async function post (e) {
     url: 'retrieve.js',
     body: {
       url,
+      postData: $('#postData').value,
       method: $('#method').value,
       headers: [...$('table.requestHeaders').rows].slice(1).reduce((h, row) => {
         const {cells} = row;
@@ -101,6 +102,12 @@ jml('div', {className: 'ancestor'}, [
     ['label', {className: 'col'}, [
       ['div', {className: 'urlCol'}, ['URL ']],
       ['input', {className: 'urlCol', type: 'url', $on: {change: post}}],
+      ['div', [
+        ['label', [
+          'Post body',
+          ['textarea', {id: 'postData', style: 'height: 100px; width: 100%;'}]
+        ]]
+      ]],
       ['div', [
         ['label', [
           'HTTP Method: ',

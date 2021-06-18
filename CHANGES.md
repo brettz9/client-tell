@@ -1,5 +1,12 @@
 # CHANGES for client-tell
 
+## 0.4.0
+
+### User-impacting
+
+- Fix: Non-GET requests may have been problematic
+- Enhancement: Allow POST body
+
 ## 0.3.0
 
 ### User-impacting
