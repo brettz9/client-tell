@@ -1,5 +1,11 @@
 # CHANGES for client-tell
 
+## 0.5.0
+
+### User-impacting
+
+- feat(BREAKING): switch to native ESM package/server
+
 ## 0.4.0
 
 ### User-impacting

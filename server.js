@@ -1,11 +1,9 @@
 /* eslint-disable no-console -- Server */
-'use strict';
+import http from 'http';
+import https from 'https';
+import fs from 'fs';
 
 const port = 8085;
-
-const http = require('http');
-const https = require('https');
-const fs = require('fs');
 
 /**
  *
@@ -124,7 +122,8 @@ http.createServer((req, res) => {
   }
   res.setHeader('Content-Type', contentType);
 
-  // Suppressing alert in next code line comment due to filtering being in place above
+  // Suppressing alert in next code line comment due to filtering being
+  //   in place above
   const s = fs.createReadStream(filePath); // lgtm [js/path-injection]
   s.pipe(res);
   s.on('error', (err) => {

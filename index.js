@@ -126,7 +126,9 @@ jml('div', {className: 'ancestor'}, [
       ]]
     ]],
     ['div', {id: 'requestHeaders', className: 'col requestHeaders'}, [
-      ['datalist', {id: 'datalist'}, [...standardHeaders, ...nonstandardHeaders].map(
+      ['datalist', {
+        id: 'datalist'
+      }, [...standardHeaders, ...nonstandardHeaders].map(
         (header) => ['option', [header]]
       )],
       ['table', {className: 'requestHeaders'}, [
@@ -143,7 +145,9 @@ jml('div', {className: 'ancestor'}, [
       ]]
     ]],
 
-    ['textarea', {id: 'htmlText', placeholder: '(Response body)', className: 'col'}],
+    ['textarea', {
+      id: 'htmlText', placeholder: '(Response body)', className: 'col'
+    }],
     ['div', {id: 'responseHeaders', className: 'col responseHeaders'}, [
       ['span', {className: 'placeholder'}, ['(Response headers)']]
     ]],
