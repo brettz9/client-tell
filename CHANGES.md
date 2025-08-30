@@ -1,5 +1,9 @@
 # CHANGES for client-tell
 
+## ?
+
+- chore: update devDeps.; lint
+
 ## 0.5.0
 
 ### User-impacting

@@ -1,5 +1,6 @@
-import postJSON from './node_modules/simple-post-json/dist/index-es.js';
-import {jml, $, body} from './node_modules/jamilih/dist/jml-es.js';
+// eslint-disable-next-line import/no-unresolved -- Bug?
+import postJSON from 'simple-post-json';
+import {jml, $, body} from 'jamilih';
 
 const standardHeaders = [
   'Accept', 'Accept-Charset', 'Accept-Encoding', 'Accept-Language',
