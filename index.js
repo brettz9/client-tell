@@ -44,15 +44,17 @@ async function post (e) {
     }
   });
   const doc = new DOMParser().parseFromString(res.html, 'text/html');
-  if (![...doc.querySelectorAll('base')].some((base) => Boolean(base.href))) {
-    doc.head.append(jml('base', {href: url}));
+  if (doc.head) {
+    if (![...doc.querySelectorAll('base')].some((base) => Boolean(base.href))) {
+      doc.head.append(jml('base', {href: url}));
+    }
+    $('#htmlPreview').replaceWith(jml('iframe', {
+      id: 'htmlPreview',
+      className: 'htmlPreview',
+      srcdoc: doc.documentElement.outerHTML
+      // sandbox: 'allow-scripts'
+    }));
   }
-  $('#htmlPreview').replaceWith(jml('iframe', {
-    id: 'htmlPreview',
-    className: 'htmlPreview',
-    srcdoc: doc.documentElement.outerHTML
-    // sandbox: 'allow-scripts'
-  }));
   $('#htmlText').value = res.html;
   $('#responseHeaders').firstElementChild.replaceWith(jml(
     'table', {className: 'responseHeaders'}, [
