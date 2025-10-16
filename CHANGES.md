@@ -2,6 +2,7 @@
 
 ## ?
 
+- feat: add TS
 - chore: update devDeps.; lint
 
 ## 0.5.0

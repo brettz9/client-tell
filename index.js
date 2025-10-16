@@ -1,6 +1,34 @@
 // eslint-disable-next-line import/no-unresolved -- Bug?
 import postJSON from 'simple-post-json';
-import {jml, $, body} from 'jamilih';
+import {jml, body} from 'jamilih';
+
+/**
+ * @param {string} sel
+ */
+const $ = (sel) => {
+  return /** @type {HTMLElement} */ (document.querySelector(sel));
+};
+
+/**
+ * @param {string} sel
+ */
+const $i = (sel) => {
+  return /** @type {HTMLInputElement} */ (document.querySelector(sel));
+};
+
+/**
+ * @param {string} sel
+ */
+const $ta = (sel) => {
+  return /** @type {HTMLTableElement} */ (document.querySelector(sel));
+};
+
+/**
+ * @param {string} sel
+ */
+const $te = (sel) => {
+  return /** @type {HTMLTextAreaElement} */ (document.querySelector(sel));
+};
 
 const standardHeaders = [
   'Accept', 'Accept-Charset', 'Accept-Encoding', 'Accept-Language',
@@ -25,22 +53,31 @@ const nonstandardHeaders = [
  * @returns {Promise<void>}
  */
 async function post (e) {
-  const url = e.target.value;
+  const url = /** @type {EventTarget & {value: string}} */ (e.target).value;
   const res = await postJSON({
     url: 'retrieve.js',
     body: {
       url,
-      postData: $('#postData').value,
-      method: $('#method').value,
-      headers: [...$('table.requestHeaders').rows].slice(1).reduce((h, row) => {
+      postData: $te('#postData').value,
+      method: $i('#method').value,
+      headers: [
+        ...$ta('table.requestHeaders').rows
+      ].slice(1).reduce((h, row) => {
         const {cells} = row;
-        const headerName = cells[1].querySelector('input').value;
+        const headerName = /** @type {HTMLInputElement} */ (
+          /** @type {HTMLElement} */ (
+            cells[1]
+          ).querySelector('input')
+        ).value;
         if (!headerName.trim()) {
           return h;
         }
-        h[headerName] = cells[2].querySelector('input').value;
+        h[headerName] = /** @type {HTMLInputElement} */ (
+          cells[2].querySelector('input')
+        ).value;
         return h;
-      }, {})
+      // eslint-disable-next-line jsdoc/imports-as-dependencies -- Bug
+      }, /** @type {import('simple-post-json').Headers} */ ({}))
     }
   });
   const doc = new DOMParser().parseFromString(res.html, 'text/html');
@@ -55,38 +92,44 @@ async function post (e) {
       // sandbox: 'allow-scripts'
     }));
   }
-  $('#htmlText').value = res.html;
-  $('#responseHeaders').firstElementChild.replaceWith(jml(
+  $te('#htmlText').value = res.html;
+  /** @type {HTMLSpanElement} */
+  (/** @type {HTMLDivElement} */
+    ($('#responseHeaders')).firstElementChild).replaceWith(jml(
     'table', {className: 'responseHeaders'}, [
       ['tr', [
         ['th', ['Header name']],
         ['th', ['Value']]
       ]],
-      ...Object.entries(res.headers).map(([name, val]) => [
+      ...Object.entries(
+        res.headers
+      ).map(([name, val]) => /** @type {import('jamilih').JamilihArray} */ ([
         'tr', [
           ['td', [name]],
           ['td', [val]]
         ]
-      ])
+      ]))
     ]
   ));
 }
 
 /**
  *
- * @returns {JamilihArray}
+ * @returns {import('jamilih').JamilihArray}
  */
 function createRequestHeaderRow () {
   return ['tr', [
     ['td', [
       ['button', {$on: {click () {
-        $('table.requestHeaders').append(
+        $ta('table.requestHeaders').append(
           jml(...createRequestHeaderRow())
         );
       }}}, ['+']],
       ['button', {$on: {click (e) {
-        if ($('table.requestHeaders').rows.length > 2) {
-          e.target.parentNode.parentNode.remove();
+        if ($ta('table.requestHeaders').rows.length > 2) {
+          /** @type {HTMLElement} */
+          (/** @type {HTMLElement} */
+            (e.target.parentNode).parentNode).remove();
         }
       }}}, ['-']]
     ]],

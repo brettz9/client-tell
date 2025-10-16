@@ -7,7 +7,7 @@ const port = 8085;
 
 /**
  *
- * @param {Stream} stream
+ * @param {http.IncomingMessage} stream
  * @returns {Promise<string>}
  */
 const stringifyStream = function (stream) {
@@ -30,11 +30,11 @@ const stringifyStream = function (stream) {
  * @todo Use a proper tool
  * @param {string} file
  * @throws {TypeError}
- * @returns {string} Content-type
+ * @returns {string|undefined} Content-type
  */
 const getContentTypeForFileByExtension = function (file) {
   let contentType;
-  switch ((/(?:\.[^.]*)?$/u).exec(file)[0]) {
+  switch ((/(?:\.[^.]*)?$/u).exec(file)?.[0]) {
   case '.ico':
     break;
   case '.html':
@@ -56,14 +56,18 @@ const getContentTypeForFileByExtension = function (file) {
 
 /**
  *
- * @param {Request} req
- * @param {Response} res
+ * @param {http.IncomingMessage} req
+ * @param {http.ServerResponse<http.IncomingMessage> & {
+ *   req: http.IncomingMessage;
+ * }} res
  * @returns {Promise<void>}
  */
 const retrieveURLAndHeaders = async function (req, res) {
-  let requestedInfo = await stringifyStream(req);
+  const requestedInfoStr = await stringifyStream(req);
+
+  let requestedInfo;
   try {
-    requestedInfo = JSON.parse(requestedInfo);
+    requestedInfo = JSON.parse(requestedInfoStr);
   } catch (err) {
     console.log('JSON parsing error:', err);
     return;
@@ -92,7 +96,7 @@ const retrieveURLAndHeaders = async function (req, res) {
   const protocol = urlObj.protocol === 'https:' ? https : http;
   const rq = protocol.request(opts, async (resp) => {
     console.log(`STATUS: ${res.statusCode}`);
-    console.log(`HEADERS: ${JSON.stringify(res.headers)}`);
+    console.log(`HEADERS: ${JSON.stringify(res.getHeaders())}`);
 
     resp.setEncoding('utf8');
     const chunks = await stringifyStream(resp);
@@ -110,7 +114,7 @@ const retrieveURLAndHeaders = async function (req, res) {
 };
 
 http.createServer((req, res) => {
-  const {url} = req;
+  const {url = ''} = req;
   if (url === '/retrieve.js') {
     retrieveURLAndHeaders(req, res);
     return;
